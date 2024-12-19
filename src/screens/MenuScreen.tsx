@@ -1,9 +1,12 @@
 import React from 'react';
-import { View, FlatList, ActivityIndicator, Text, StyleSheet } from 'react-native';
+import { View, FlatList, ActivityIndicator, Text, StyleSheet, Touchable, TouchableOpacity } from 'react-native';
 import { MenuItem } from '../components/MenuItem';
 import { useMenu } from '../hooks/useMenu';
+import { Link, useNavigation } from '@react-navigation/native';
 
 export const MenuScreen = () => {
+  
+  const navigation = useNavigation();
   const { menuItems, loading, error } = useMenu();
 
   if (loading) {
@@ -23,12 +26,34 @@ export const MenuScreen = () => {
   }
 
   return (
+    <View>
+      <TouchableOpacity onPress={() => navigation.navigate('Cart')}>
+        <View style={{
+          width: '80%',
+          height: 50,
+          borderRadius: 10,
+          backgroundColor: 'black',
+          alignSelf: 'center',
+          marginTop: 10,
+          justifyContent: 'center'
+        }}>
+          <Text style={{
+            fontSize: 30,
+            fontWeight: 700,
+            color: 'white',
+            textAlign: 'center'
+          }}>Go to Cart</Text>
+        </View>
+      </TouchableOpacity>
     <FlatList
       data={menuItems}
       renderItem={({ item }) => <MenuItem item={item} />}
       keyExtractor={(item) => item.id}
       contentContainerStyle={styles.container}
     />
+
+      
+    </View>
   );
 };
 

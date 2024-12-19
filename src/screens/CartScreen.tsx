@@ -10,7 +10,7 @@ export const CartScreen = () => {
   const { items, total } = useCartStore();
 
   if (items.length === 0) {
-    return (
+    return (  
       <View style={styles.emptyContainer}>
         <Text style={styles.emptyText}>Your cart is empty</Text>
       </View>
